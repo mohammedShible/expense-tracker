@@ -53,13 +53,17 @@ Installation
 
 No additional installation or build tools are required.
 
-Screenshots
+## Screenshots
 
-Screenshots of the application will be added here.
+### Light Mode
+![Expense Tracker Light Mode](screenshots/light-mode.png)
 
-<!-- Add your screenshots here -->Live Demo
+### Dark Mode
+![Expense Tracker Dark Mode](screenshots/dark-mode.png)
 
-Coming soon.
+Live Demo
+
+Not deployed yet.
 
 Future Improvements
 
