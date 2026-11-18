@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="container-of-header">
+      <div class="calender">
+        <i class="fa-regular fa-calendar"></i>
+        <span class="the-date">April 25,2025</span>
+      </div>
+      <i class="fa-solid fa-circle-half-stroke mode-of-thePage"></i>
+    </div>
+    <div>
+      <div class="menu-icon"><i class="fa-solid fa-bars"></i></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="Paragraph">
+      <h2>Add New Expense</h2>
+      <p class="p-para">
+        Easily record your expenses and track your spending
+      </p>
+    </div>
+    <section class="add-transaction-form">
+      <form class="add-expense-form">
+        <div class="expense-name-input">
+          <label for="expense-name" class="expense-name-para">Expense Name</label>
+          <input id="expense-name" type="text" placeholder="Groceries" />
+        </div>
+
+        <div class="amount-input">
+          <label for="amount" class="amount-para">Amount</label>
+          <input id="amount" type="text" inputmode="numeric" placeholder="Enter amount" />
+          <div class="amount-icon-div"><i class="fa-solid fa-dollar-sign amount-icon"></i></div>
+        </div>
+
+        <div class="category-btn">
+          <p class="category-para">Category</p>
+          <button class="category" type="button">
+            <div><i class="fa-solid fa-box-archive"></i>
+              <span id="selectedText1" class="Category-span">Choose Category</span>
+            </div>
+            <div><i class="fa-solid fa-angle-down arrow-icon"></i></div>
+          </button>
+          <div class="dropdown-content myDropdown">
+            <a href="#">Rent</a>
+            <a href="#">Food</a>
+            <a href="#">Transport</a>
+            <a href="#">Entertainment</a>
+            <a href="#">Other</a>
+          </div>
+        </div>
+
+        <button type="submit" class="add-expense-btn">
+          <i class="fa-solid fa-plus"></i> Add Expense
+        </button>
+      </form>
+    </section>
+    <section class="summary-cards">
+      <div class="max-Expense">
+        <div class="max-expense-details">
+          <span class="summary-cards-span">Max Expense </span>
+          <p class="max-Expense-para">0 $</p>
+        </div>
+        <div class="max-expense-icon">
+          <i class="fa-solid fa-circle-arrow-up"></i>
+        </div>
+      </div>
+
+      <div class="total-expense">
+        <div class="total-expense-details">
+          <span class="summary-cards-span">Total Expense </span>
+          <p class="total-expense-para">0 $</p>
+        </div>
+        <div class="total-expense-icon">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+      </div>
+
+      <div class="count-of-expense">
+        <div class="count-of-expense-details">
+          <span class="summary-cards-span">Count of Expense </span>
+          <p class="count-of-expense-para">0</p>
+        </div>
+        <div class="count-of-expense-icon">
+          <i class="fa-solid fa-trash-can"></i>
+        </div>
+      </div>
+    </section>
+    <section class="statistics">
+      <h3 class="statistics-para">Expense Distribution by Category</h3>
+      <div class="statistics-container">
+        <div class="statistics-details">
+          <div class="statistics-details-div">
+            <span id="Rent-span">40%</span>
+            <div>
+              <p>Rent</p>
+              <div id="Rent-point" class="point"></div>
+            </div>
+          </div>
+          <div class="statistics-details-div">
+            <span id="Food-span">24%</span>
+            <div>
+              <p>Food</p>
+              <div id="Food-point" class="point"></div>
+            </div>
+          </div>
+          <div class="statistics-details-div">
+            <span id="Transport-span">15%</span>
+            <div>
+              <p>Transport</p>
+              <div id="Transport-point" class="point"></div>
+            </div>
+          </div>
+          <div class="statistics-details-div">
+            <span id="Entertainment-span">10%</span>
+            <div>
+              <p>Entertainment</p>
+              <div id="Entertainment-point" class="point"></div>
+            </div>
+          </div>
+          <div class="statistics-details-div">
+            <span id="Other-span">11%</span>
+            <div>
+              <p>Other</p>
+              <div id="Other-point" class="point"></div>
+            </div>
+          </div>
+        </div>
+        <div class="statistics-graph">
+          <canvas id="myPieChart"> </canvas>
+          <div>
+            <span id="totalAmount" class="statistics-graph-span">$ 620</span>
+            <p>Total Expenses</p>
+          </div>
+        </div>
+      </div>
+      <div class="no-data-message">There are no expenses yet</div>
+    </section>
+    <section class="transaction-list">
+      <p class="transaction-list-head-para">Expenses List</p>
+      <div class="transaction-list-head">
+        <span class="Actions-span">Actions</span><span class="Amount-span">Amount</span><span
+          class="Category-span">Category</span><span class="Name-span">Name</span>
+        <span class="counter-span">#</span>
+      </div>
+      <div class="transactions-container"></div>
+      <div class="edit-expense">
+        <div class="edit-expense-header">
+          <span>Edit Expense</span>
+          <button title="Close" type="button" id="close-edit-window-btn"><i class="fa-solid fa-x"></i></button>
+        </div>
+        <form class="edit-expense-form">
+          <div class="edit-expense-name-input">
+            <label for="edit-expense-name" class="edit-expense-name-para">Expense Name</label>
+            <input id="edit-expense-name" type="text" />
+          </div>
+
+          <div class="edit-amount-input">
+            <label for="edit-amount" class="edit-amount-para">Amount</label>
+            <input id="edit-amount" type="text" inputmode="numeric" />
+          </div>
+
+          <div class="edit-category-btn">
+            <p class="edit-category-para">Category</p>
+            <button class="edit-category" type="button">
+              <div><i class="fa-solid fa-box-archive"></i>
+                <span id="selectedText2" class="edit-Category-span"></span>
+              </div>
+              <div><i class="fa-solid fa-angle-down arrow-icon"></i></div>
+            </button>
+            <div class="dropdown-content myDropdown">
+              <a href="#">Rent</a>
+              <a href="#">Food</a>
+              <a href="#">Transport</a>
+              <a href="#">Entertainment</a>
+              <a href="#">Other</a>
+            </div>
+          </div>
+          <div class="edit-expense-footer">
+            <button type="submit" class="save-expense-btn">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section class="advice">
+      <div class="advice-div">
+        <div class="advice-div-head">
+          <i class="fa-solid fa-fire"></i> <span>Tip</span>
+        </div>
+        <div class="advice-div-para">
+          <p>Try tracking your expenses daily for faster goals!</p>
+        </div>
+      </div>
+    </section>
+    <section class="delete-all">
+      <div>
+        <button class="delete-all-transactions" type="button">
+          Delete All Expenses
+        </button>
+      </div>
+    </section>
+  </main>
+  <div class="side-bar">
+    <div class="side-bar-container">
+      <div class="head">
+        <span class="head-span">Expense Tracker</span>
+        <i class="fa-solid fa-wallet head-icon"></i>
+      </div>
+      <div class="side-hover"></div>
+      <div class="Overview sb-div">
+        <span class="sb-span">Overview</span>
+        <i class="fa-solid fa-house sb-icon"></i>
+      </div>
+      <div class="Expenses sb-div">
+        <span class="sb-span">Expenses</span>
+        <i class="fa-solid fa-list-ul sb-icon"></i>
+      </div>
+      <div class="statistics-sb sb-div">
+        <span class="sb-span">statistics</span>
+        <i class="fa-solid fa-chart-simple sb-icon"></i>
+      </div>
+      <div class="Setting sb-div">
+        <span class="sb-span">Setting</span>
+        <i class="fa-solid fa-gear sb-icon"></i>
+      </div>
+    </div>
+    <div class="motivation-phrase">
+      <i class="fa-solid fa-seedling sprout-icon"></i>
+      <p class="motivation">small step... makes a big difference</p>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
