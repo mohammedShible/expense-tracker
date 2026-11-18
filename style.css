@@ -900,6 +900,16 @@ main .Paragraph .p-para {
   }
 }
 
+@media (max-width:1160px) {
+  .advice {
+    font-size: 13px;
+  }
+
+  .delete-all>div>button {
+    font-size: 15px;
+  }
+}
+
 @media (max-width:768px) {
   .side-bar {
     border-radius: 0;
